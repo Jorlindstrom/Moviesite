@@ -74,12 +74,12 @@ function initApp(api) {
     try {
       const movie = await api.loadMovie(request.params.movieId);
 
-      // if (!movie) {
-      //   return response.status(404).render("404", {
-      //     layout: "main", // Standardlayout eller ingen layout alls
-      //     title: "404 - Page Not Found",
-      //   });
-      // }
+      if (!movie) {
+        return response.status(404).render("404", {
+          layout: "main", // Standardlayout or no layout at all
+          title: "404 - Page Not Found",
+        });
+      }
 
       response.render("movie", {
         layout: "movie-layout",
@@ -88,14 +88,14 @@ function initApp(api) {
           "Retro biografen ligger i Västerås och visar filmer från förr",
         keywords:
           "Biograf,retro, 50-tal, 70-tal, 80-tal, 90-tal, 00-tal, Västerås",
-        movie, // Skicka filmen till Handlebars
+        movie, // Send movie to handelbars
       });
     } catch (error) {
       console.error("Error fetching the movie:", error);
-      //   response.status(404).render('404', {
-      //     layout: "main",
-      //     title: "404 – Page Not Found",
-      //   })
+        response.status(500).render('500', {
+          layout: "main",
+          title: "500 – Internal Server Error",
+        })
     }
   });
 

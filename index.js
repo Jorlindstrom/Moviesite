@@ -1,4 +1,4 @@
-import initApp from './static/js/app.js';
+import initApp from './src/app.js';
 import { loadMovie, loadMovies } from './static/js/movies.js';
 
 const api = {
